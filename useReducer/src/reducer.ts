@@ -44,6 +44,4 @@ export const todoReducer = (state: Todo[], action: Action): Todo[] => {
     case REMOVE_COMPLETED_ITEMS:
       return state.filter((todo) => !todo.completed);
   }
-
-  // throw Error(`Unknown action: ${action.type}`);
 };

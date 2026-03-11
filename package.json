@@ -13,10 +13,12 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
     "classnames": "^2.2.6",
-    "react-router-dom": "^7.13.1",
-    "react-dom": "^19",
     "react": "^19",
+    "react-dom": "^19",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.13.1",
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.1"
   },

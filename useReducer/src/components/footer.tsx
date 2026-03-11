@@ -12,7 +12,7 @@ type Props = {
 export function Footer({ todos, dispatch }: Props) {
   const { pathname: route } = useLocation();
 
-  const activeTodos = () => todos.filter((todo) => !todo.completed);
+  const activeTodos = todos.filter((todo) => !todo.completed);
   const removeCompleted = () => dispatch({ type: REMOVE_COMPLETED_ITEMS });
 
   if (todos.length === 0) return null;

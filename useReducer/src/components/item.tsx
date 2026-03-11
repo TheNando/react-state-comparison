@@ -2,9 +2,9 @@ import cn from "classnames";
 import { memo, useState, type Dispatch } from "react";
 
 import {
-  REMOVE_ITEM,
-  TOGGLE_ITEM,
-  UPDATE_ITEM,
+  REMOVE_TODO,
+  TOGGLE_TODO,
+  UPDATE_TODO,
   type Action,
   type Todo
 } from "../utils";
@@ -20,10 +20,10 @@ export const Item = memo(function Item({ todo, dispatch }: Props) {
   const [isWritable, setIsWritable] = useState(false);
   const { title, completed, id } = todo;
 
-  const toggleItem = () => dispatch({ type: TOGGLE_ITEM, payload: { id } });
-  const removeItem = () => dispatch({ type: REMOVE_ITEM, payload: { id } });
+  const toggleItem = () => dispatch({ type: TOGGLE_TODO, payload: { id } });
+  const removeItem = () => dispatch({ type: REMOVE_TODO, payload: { id } });
   const updateItem = (id: string, title: string) =>
-    dispatch({ type: UPDATE_ITEM, payload: { id, title } });
+    dispatch({ type: UPDATE_TODO, payload: { id, title } });
   const handleDoubleClick = () => setIsWritable(true);
   const handleBlur = () => setIsWritable(false);
 

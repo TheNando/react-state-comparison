@@ -2,7 +2,7 @@ import cn from "classnames";
 import { type Dispatch } from "react";
 import { useLocation } from "react-router-dom";
 
-import { REMOVE_COMPLETED_ITEMS, type Action, type Todo } from "../utils";
+import { CLEAR_COMPLETED_TODOS, type Action, type Todo } from "../utils";
 
 type Props = {
   todos: Todo[];
@@ -13,7 +13,7 @@ export function Footer({ todos, dispatch }: Props) {
   const { pathname: route } = useLocation();
 
   const activeTodos = todos.filter((todo) => !todo.completed);
-  const removeCompleted = () => dispatch({ type: REMOVE_COMPLETED_ITEMS });
+  const removeCompleted = () => dispatch({ type: CLEAR_COMPLETED_TODOS });
 
   if (todos.length === 0) return null;
 

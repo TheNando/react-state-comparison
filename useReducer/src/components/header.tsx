@@ -1,6 +1,6 @@
 import { type Dispatch } from "react";
 
-import { ADD_ITEM, type Action } from "../utils";
+import { ADD_TODO, type Action } from "../utils";
 import { Input } from "./input";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 export function Header({ dispatch }: Props) {
   const addItem = (title: string) =>
-    dispatch({ type: ADD_ITEM, payload: { title } });
+    dispatch({ type: ADD_TODO, payload: { title } });
 
   return (
     <header className="header">

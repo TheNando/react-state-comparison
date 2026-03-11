@@ -2,7 +2,7 @@ import cn from "classnames";
 import { type Dispatch } from "react";
 import { useLocation } from "react-router-dom";
 
-import { type Todo, type Action, TOGGLE_ALL } from "../utils";
+import { type Todo, type Action, TOGGLE_ALL_TODOS } from "../utils";
 import { Item } from "./item";
 
 type Props = {
@@ -20,7 +20,10 @@ export function Main({ todos, dispatch }: Props) {
   });
 
   const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
-    dispatch({ type: TOGGLE_ALL, payload: { completed: e.target.checked } });
+    dispatch({
+      type: TOGGLE_ALL_TODOS,
+      payload: { completed: e.target.checked }
+    });
 
   return (
     <main className="main">

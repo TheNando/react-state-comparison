@@ -1,12 +1,12 @@
 import cn from "classnames";
-import { memo, useState, useCallback, type Dispatch } from "react";
+import { memo, useState, type Dispatch } from "react";
 
 import {
   REMOVE_ITEM,
   TOGGLE_ITEM,
   UPDATE_ITEM,
   type Action,
-  type Todo,
+  type Todo
 } from "../utils";
 import { Input } from "./input";
 
@@ -16,7 +16,7 @@ type Props = {
   index: number;
 };
 
-export const Item = memo(function Item({ todo, dispatch, index }: Props) {
+export const Item = memo(function Item({ todo, dispatch }: Props) {
   const [isWritable, setIsWritable] = useState(false);
   const { title, completed, id } = todo;
 

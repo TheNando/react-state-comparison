@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun --hot ./react/index.ts",
-    "build": "bun build ./react/index.ts --outdir=dist --sourcemap --target=bun --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
-    "start": "NODE_ENV=production bun src/index.ts",
+    "useState": "bun --hot ./useState/index.html",
+    "useReducer": "bun --hot ./useReducer/index.html",
+    "build": "bun build ./$0/index.html --outdir=dist --sourcemap --target=bun --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
+    "start": "NODE_ENV=production bun ./$0/index.html",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

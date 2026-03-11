@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { useMemo, type Dispatch } from "react";
+import { type Dispatch } from "react";
 import { useLocation } from "react-router-dom";
 
 import { type Todo, type Action, TOGGLE_ALL } from "../utils";
@@ -13,17 +13,11 @@ type Props = {
 export function Main({ todos, dispatch }: Props) {
   const { pathname: route } = useLocation();
 
-  const visibleTodos = useMemo(
-    () =>
-      todos.filter((todo) => {
-        if (route === "/active") return !todo.completed;
-
-        if (route === "/completed") return todo.completed;
-
-        return todo;
-      }),
-    [todos, route]
-  );
+  const visibleTodos = todos.filter((todo) => {
+    if (route === "/active") return !todo.completed;
+    if (route === "/completed") return todo.completed;
+    return todo;
+  });
 
   const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
     dispatch({ type: TOGGLE_ALL, payload: { completed: e.target.checked } });

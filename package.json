@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "jotai": "bun --hot ./jotai/index.html",
     "useContext": "bun --hot ./useContext/index.html",
     "useState": "bun --hot ./useState/index.html",
     "useReducer": "bun --hot ./useReducer/index.html",
@@ -17,6 +18,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
     "classnames": "^2.2.6",
+    "jotai": "^2.18.1",
     "react": "^19",
     "react-dom": "^19",
     "react-redux": "^9.2.0",

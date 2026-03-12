@@ -1,9 +1,9 @@
 import cn from "classnames";
 import { useState } from "react";
 
-import { removeTodo, toggleTodo, updateTodo } from "../todo-slice";
+import type { Todo } from "@/lib";
+import { removeTodo, toggleTodo, updateTodo } from "../slice";
 import { useAppDispatch } from "../store";
-import { type Todo } from "../utils";
 import { Input } from "./input";
 
 type Props = {

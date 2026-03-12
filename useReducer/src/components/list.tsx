@@ -2,7 +2,8 @@ import cn from "classnames";
 import { type Dispatch } from "react";
 import { useLocation } from "react-router-dom";
 
-import { type Todo, type Action, TOGGLE_ALL_TODOS } from "../utils";
+import { isCompleted, type Todo } from "@/lib";
+import { type Action, TOGGLE_ALL_TODOS } from "../actions";
 import { Item } from "./item";
 
 type Props = {
@@ -10,7 +11,7 @@ type Props = {
   dispatch: Dispatch<Action>;
 };
 
-export function Main({ todos, dispatch }: Props) {
+export function List({ todos, dispatch }: Props) {
   const { pathname: route } = useLocation();
 
   const visibleTodos = todos.filter((todo) => {
@@ -33,7 +34,7 @@ export function Main({ todos, dispatch }: Props) {
             className="toggle-all"
             type="checkbox"
             id="toggle-all"
-            checked={visibleTodos.every((todo) => todo.completed)}
+            checked={visibleTodos.every(isCompleted)}
             onChange={toggleAll}
           />
           <label className="toggle-all-label" htmlFor="toggle-all">

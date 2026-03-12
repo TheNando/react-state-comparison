@@ -2,7 +2,7 @@ import cn from "classnames";
 import { type Dispatch, type SetStateAction } from "react";
 import { useLocation } from "react-router-dom";
 
-import { type Todo } from "../utils";
+import { isActive, type Todo } from "@/lib";
 
 type Props = {
   todos: Todo[];
@@ -12,9 +12,8 @@ type Props = {
 export function Footer({ todos, setTodos }: Props) {
   const { pathname: route } = useLocation();
 
-  const activeTodos = todos.filter((todo) => !todo.completed);
-  const removeCompleted = () =>
-    setTodos(todos.filter((todo) => !todo.completed));
+  const activeTodos = todos.filter(isActive);
+  const removeCompleted = () => setTodos(todos.filter(isActive));
 
   if (todos.length === 0) return null;
 

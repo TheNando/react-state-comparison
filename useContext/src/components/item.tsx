@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { useState } from "react";
 
-import { useTodos } from "../todo-context";
+import { useTodos } from "../context";
 import { type Todo } from "../utils";
 import { Input } from "./input";
 

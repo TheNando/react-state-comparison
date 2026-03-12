@@ -1,8 +1,8 @@
 import cn from "classnames";
 import { useState } from "react";
 
+import type { Todo } from "@/lib";
 import { useTodoStore } from "../store";
-import { type Todo } from "../utils";
 import { Input } from "./input";
 
 type Props = {

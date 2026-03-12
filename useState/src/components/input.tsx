@@ -1,23 +1,6 @@
 import { type KeyboardEvent } from "react";
 
-const map = {
-  "&": "&amp;",
-  "<": "&lt;",
-  ">": "&gt;",
-  '"': "&quot;",
-  "'": "&#x27;",
-  "/": "&#x2F;",
-} as const;
-
-type EscapeChars = keyof typeof map;
-const rxSanitize = /[&<>"'/]/gi;
-
-const sanitize = (str: string) =>
-  str.replace(rxSanitize, (match) => map[match as EscapeChars]);
-
-const hasValidMin = (value: string, min: number) => {
-  return value.length >= min;
-};
+import { hasValidMin } from "@/lib";
 
 type Props = {
   onSubmit: (title: string) => void;
@@ -32,7 +15,7 @@ export function Input({
   placeholder,
   label,
   defaultValue,
-  onBlur,
+  onBlur
 }: Props) {
   const handleBlur = () => {
     if (onBlur) onBlur();
@@ -44,7 +27,7 @@ export function Input({
 
       if (!hasValidMin(value, 2)) return;
 
-      onSubmit(sanitize(value));
+      onSubmit(value);
       e.currentTarget.value = "";
     }
   };

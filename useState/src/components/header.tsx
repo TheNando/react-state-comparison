@@ -1,6 +1,6 @@
 import { type Dispatch, type SetStateAction } from "react";
 
-import { nanoid, type Todo } from "../utils";
+import { newTodo, type Todo } from "@/lib";
 import { Input } from "./input";
 
 type Props = {
@@ -9,15 +9,7 @@ type Props = {
 };
 
 export function Header({ todos, setTodos }: Props) {
-  const addItem = (title: string) =>
-    setTodos([
-      ...todos,
-      {
-        id: nanoid(),
-        title,
-        completed: false
-      }
-    ]);
+  const addItem = (title: string) => setTodos([...todos, newTodo(title)]);
 
   return (
     <header className="header">

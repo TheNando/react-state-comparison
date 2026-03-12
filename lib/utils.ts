@@ -1,9 +1,3 @@
-export type Todo = {
-  id: string;
-  title: string;
-  completed: boolean;
-};
-
 /* Borrowed from https://github.com/ai/nanoid/blob/3.0.2/non-secure/index.js
 
 The MIT License (MIT)
@@ -47,3 +41,7 @@ export function nanoid(size = 21) {
   }
   return id;
 }
+
+export const hasValidMin = (value: string, min: number) => {
+  return value.length >= min;
+};

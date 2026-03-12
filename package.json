@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "jotai": "bun --hot ./jotai/index.html",
-    "useContext": "bun --hot ./useContext/index.html",
-    "useState": "bun --hot ./useState/index.html",
-    "useReducer": "bun --hot ./useReducer/index.html",
     "rtk": "bun --hot ./rtk/index.html",
+    "signals": "bun --hot ./signals/index.html",
+    "useContext": "bun --hot ./useContext/index.html",
+    "useReducer": "bun --hot ./useReducer/index.html",
+    "useState": "bun --hot ./useState/index.html",
     "zustand": "bun --hot ./zustand/index.html",
     "build": "bun build ./$0/index.html --outdir=dist --sourcemap --target=bun --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
     "start": "NODE_ENV=production bun ./$0/index.html",
@@ -16,6 +17,7 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@preact/signals-react": "^3.9.1",
     "@reduxjs/toolkit": "^2.11.2",
     "classnames": "^2.2.6",
     "jotai": "^2.18.1",

@@ -6,7 +6,15 @@ import {
   type PropsWithChildren
 } from "react";
 
-import { nanoid, type Todo } from "./utils";
+import {
+  isActive,
+  isNotId,
+  newTodo,
+  toggleIfId,
+  updateIfId,
+  withCompletedAs,
+  type Todo
+} from "@/lib";
 
 type TodoContextValue = {
   todos: Todo[];
@@ -27,39 +35,19 @@ export function TodoProvider({ children }: PropsWithChildren) {
     () => ({
       todos,
       addTodo: (title) =>
-        setTodos((currentTodos) =>
-          currentTodos.concat({
-            id: nanoid(),
-            title,
-            completed: false
-          })
-        ),
+        setTodos((currentTodos) => currentTodos.concat(newTodo(title))),
       clearCompletedTodos: () =>
-        setTodos((currentTodos) =>
-          currentTodos.filter((todo) => !todo.completed)
-        ),
+        setTodos((currentTodos) => currentTodos.filter(isActive)),
       removeTodo: (id) =>
-        setTodos((currentTodos) =>
-          currentTodos.filter((todo) => todo.id !== id)
-        ),
+        setTodos((currentTodos) => currentTodos.filter(isNotId(id))),
       toggleAllTodos: (completed) =>
         setTodos((currentTodos) =>
-          currentTodos.map((todo) =>
-            todo.completed !== completed ? { ...todo, completed } : todo
-          )
+          currentTodos.map(withCompletedAs(completed))
         ),
       toggleTodo: (id) =>
-        setTodos((currentTodos) =>
-          currentTodos.map((todo) =>
-            todo.id === id ? { ...todo, completed: !todo.completed } : todo
-          )
-        ),
+        setTodos((currentTodos) => currentTodos.map(toggleIfId(id))),
       updateTodo: (id, title) =>
-        setTodos((currentTodos) =>
-          currentTodos.map((todo) =>
-            todo.id === id ? { ...todo, title } : todo
-          )
-        )
+        setTodos((currentTodos) => currentTodos.map(updateIfId(id, title)))
     }),
     [todos]
   );

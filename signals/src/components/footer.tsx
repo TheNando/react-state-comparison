@@ -1,23 +1,26 @@
+import { useSignals } from "@preact/signals-react/runtime";
 import cn from "classnames";
 import { useLocation } from "react-router-dom";
 
-import { isActive } from "@/lib";
-import { clearCompletedTodos } from "../slice";
-import { useAppDispatch, useAppSelector } from "../store";
+import {
+  clearCompletedTodos,
+  hasCompletedTodos,
+  remainingTodosCount,
+  todos
+} from "../store";
 
 export function Footer() {
+  useSignals();
   const { pathname: route } = useLocation();
-  const dispatch = useAppDispatch();
-  const todos = useAppSelector((state) => state.todos);
+  const todoCount = todos.value.length;
+  const activeTodoCount = remainingTodosCount.value;
 
-  const activeTodos = todos.filter(isActive);
-
-  if (todos.length === 0) return null;
+  if (todoCount === 0) return null;
 
   return (
     <footer className="footer">
       <span className="todo-count">
-        {`${activeTodos.length} ${activeTodos.length === 1 ? "item" : "items"} left!`}
+        {`${activeTodoCount} ${activeTodoCount === 1 ? "item" : "items"} left!`}
       </span>
       <ul className="filters">
         <li>
@@ -41,8 +44,8 @@ export function Footer() {
       </ul>
       <button
         className="clear-completed"
-        disabled={activeTodos.length === todos.length}
-        onClick={() => dispatch(clearCompletedTodos())}
+        disabled={!hasCompletedTodos.value}
+        onClick={clearCompletedTodos}
       >
         Clear completed
       </button>

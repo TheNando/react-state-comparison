@@ -1,6 +1,6 @@
 import { Footer } from "./components/footer";
 import { Header } from "./components/header";
-import { Main } from "./components/main";
+import { List } from "./components/list";
 
 import "./app.css";
 
@@ -8,7 +8,7 @@ export function App() {
   return (
     <>
       <Header />
-      <Main />
+      <List />
       <Footer />
     </>
   );

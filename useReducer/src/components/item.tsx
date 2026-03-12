@@ -1,13 +1,8 @@
 import cn from "classnames";
 import { memo, useState, type Dispatch } from "react";
 
-import {
-  REMOVE_TODO,
-  TOGGLE_TODO,
-  UPDATE_TODO,
-  type Action,
-  type Todo
-} from "../utils";
+import type { Todo } from "@/lib";
+import { REMOVE_TODO, TOGGLE_TODO, UPDATE_TODO, type Action } from "../actions";
 import { Input } from "./input";
 
 type Props = {

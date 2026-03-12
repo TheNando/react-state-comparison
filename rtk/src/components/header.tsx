@@ -1,4 +1,4 @@
-import { addTodo } from "../todo-slice";
+import { addTodo } from "../slice";
 import { useAppDispatch } from "../store";
 import { Input } from "./input";
 

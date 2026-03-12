@@ -1,9 +1,7 @@
-import { useTodos } from "../context";
+import { addTodo } from "../store";
 import { Input } from "./input";
 
 export function Header() {
-  const { addTodo } = useTodos();
-
   return (
     <header className="header">
       <h1>todos</h1>

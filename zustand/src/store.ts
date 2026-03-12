@@ -1,6 +1,14 @@
 import { create } from "zustand/react";
 
-import { nanoid, type Todo } from "./utils";
+import {
+  isActive,
+  isNotId,
+  newTodo,
+  toggleIfId,
+  updateIfId,
+  withCompletedAs,
+  type Todo
+} from "@/lib";
 
 type UpdateTodoPayload = {
   id: string;
@@ -21,31 +29,27 @@ export const useTodoStore = create<TodoStore>((set) => ({
   todos: [],
   addTodo: (title) =>
     set((state) => ({
-      todos: [...state.todos, { id: nanoid(), title, completed: false }]
+      todos: [...state.todos, newTodo(title)]
     })),
   clearCompletedTodos: () =>
     set((state) => ({
-      todos: state.todos.filter((todo) => !todo.completed)
+      todos: state.todos.filter(isActive)
     })),
   removeTodo: (id) =>
     set((state) => ({
-      todos: state.todos.filter((todo) => todo.id !== id)
+      todos: state.todos.filter(isNotId(id))
     })),
   toggleAllTodos: (completed) =>
     set((state) => ({
-      todos: state.todos.map((todo) => ({ ...todo, completed }))
+      todos: state.todos.map(withCompletedAs(completed))
     })),
   toggleTodo: (id) =>
     set((state) => ({
-      todos: state.todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
+      todos: state.todos.map(toggleIfId(id))
     })),
   updateTodo: ({ id, title }) =>
     set((state) => ({
-      todos: state.todos.map((todo) =>
-        todo.id === id ? { ...todo, title } : todo
-      )
+      todos: state.todos.map(updateIfId(id, title))
     }))
 }));
 

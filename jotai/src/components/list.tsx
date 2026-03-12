@@ -1,13 +1,15 @@
 import cn from "classnames";
+import { useAtomValue, useSetAtom } from "jotai/react";
 import { useLocation } from "react-router-dom";
 
-import { useTodoStore } from "../store";
+import { isCompleted } from "@/lib";
+import { todosAtom, toggleAllTodosAtom } from "../atoms/todos";
 import { Item } from "./item";
 
-export function Main() {
+export function List() {
   const { pathname: route } = useLocation();
-  const todos = useTodoStore((state) => state.todos);
-  const toggleAllTodos = useTodoStore((state) => state.toggleAllTodos);
+  const todos = useAtomValue(todosAtom);
+  const toggleAllTodos = useSetAtom(toggleAllTodosAtom);
 
   const visibleTodos = todos.filter((todo) => {
     if (route === "/active") return !todo.completed;
@@ -26,7 +28,7 @@ export function Main() {
             className="toggle-all"
             type="checkbox"
             id="toggle-all"
-            checked={visibleTodos.every((todo) => todo.completed)}
+            checked={visibleTodos.every(isCompleted)}
             onChange={toggleAll}
           />
           <label className="toggle-all-label" htmlFor="toggle-all">

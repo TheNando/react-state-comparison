@@ -1,6 +1,7 @@
 import cn from "classnames";
 import { useLocation } from "react-router-dom";
 
+import { isActive } from "@/lib";
 import { useTodoStore } from "../store";
 
 export function Footer() {
@@ -10,7 +11,7 @@ export function Footer() {
     (state) => state.clearCompletedTodos
   );
 
-  const activeTodos = todos.filter((todo) => !todo.completed);
+  const activeTodos = todos.filter(isActive);
 
   if (todos.length === 0) return null;
 

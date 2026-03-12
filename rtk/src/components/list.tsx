@@ -1,11 +1,12 @@
 import cn from "classnames";
 import { useLocation } from "react-router-dom";
 
-import { toggleAllTodos } from "../todo-slice";
+import { isCompleted } from "@/lib";
+import { toggleAllTodos } from "../slice";
 import { useAppDispatch, useAppSelector } from "../store";
 import { Item } from "./item";
 
-export function Main() {
+export function List() {
   const { pathname: route } = useLocation();
   const dispatch = useAppDispatch();
   const todos = useAppSelector((state) => state.todos);
@@ -27,7 +28,7 @@ export function Main() {
             className="toggle-all"
             type="checkbox"
             id="toggle-all"
-            checked={visibleTodos.every((todo) => todo.completed)}
+            checked={visibleTodos.every(isCompleted)}
             onChange={toggleAll}
           />
           <label className="toggle-all-label" htmlFor="toggle-all">

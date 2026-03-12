@@ -23,7 +23,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/lib": ["./lib"]
     },
 
     // Some stricter flags (disabled by default)

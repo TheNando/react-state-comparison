@@ -1,9 +1,8 @@
 import cn from "classnames";
-import { useSetAtom } from "jotai/react";
 import { useState } from "react";
 
 import type { Todo } from "@/lib";
-import { removeTodoAtom, toggleTodoAtom, updateTodoAtom } from "../atoms/todos";
+import { removeTodo, toggleTodo, updateTodo } from "../store";
 import { Input } from "./input";
 
 type Props = {
@@ -12,9 +11,6 @@ type Props = {
 
 export const Item = function Item({ todo }: Props) {
   const [isWritable, setIsWritable] = useState(false);
-  const toggleTodo = useSetAtom(toggleTodoAtom);
-  const removeTodo = useSetAtom(removeTodoAtom);
-  const updateTodo = useSetAtom(updateTodoAtom);
   const { title, completed, id } = todo;
 
   const handleDoubleClick = () => setIsWritable(true);

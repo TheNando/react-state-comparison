@@ -1,6 +1,6 @@
 import { type Dispatch } from "react";
 
-import { ADD_TODO, type Action } from "../utils";
+import { ADD_TODO, type Action } from "../actions";
 import { Input } from "./input";
 
 type Props = {

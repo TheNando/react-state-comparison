@@ -1,71 +1,49 @@
 import { atom } from "jotai/vanilla";
 
-import { nanoid, type Todo } from "../utils";
+import {
+  isActive,
+  isCompleted,
+  isNotId,
+  newTodo,
+  toggleIfId,
+  updateIfId,
+  withCompletedAs,
+  type Todo
+} from "@/lib";
 
 export const todosAtom = atom<Todo[]>([]);
 
-export const remainingTodosCountAtom = atom(
-  (get) => get(todosAtom).filter((todo) => !todo.completed).length
-);
+export const addTodoAtom = atom(null, (get, set, title: string) => {
+  set(todosAtom, [...get(todosAtom), newTodo(title)]);
+});
+
+export const clearCompletedTodosAtom = atom(null, (get, set) => {
+  set(todosAtom, get(todosAtom).filter(isActive));
+});
 
 export const hasCompletedTodosAtom = atom((get) =>
-  get(todosAtom).some((todo) => todo.completed)
+  get(todosAtom).some(isCompleted)
 );
 
-export const addTodoAtom = atom(null, (get, set, title: string) => {
-  set(todosAtom, [
-    ...get(todosAtom),
-    {
-      id: nanoid(),
-      title,
-      completed: false
-    }
-  ]);
-});
-
-export const toggleAllTodosAtom = atom(
-  null,
-  (get, set, completed: boolean) => {
-    set(
-      todosAtom,
-      get(todosAtom).map((todo) =>
-        todo.completed !== completed ? { ...todo, completed } : todo
-      )
-    );
-  }
+export const remainingTodosCountAtom = atom(
+  (get) => get(todosAtom).filter(isActive).length
 );
-
-export const toggleTodoAtom = atom(null, (get, set, id: string) => {
-  set(
-    todosAtom,
-    get(todosAtom).map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    )
-  );
-});
 
 export const removeTodoAtom = atom(null, (get, set, id: string) => {
-  set(
-    todosAtom,
-    get(todosAtom).filter((todo) => todo.id !== id)
-  );
+  set(todosAtom, get(todosAtom).filter(isNotId(id)));
+});
+
+export const toggleAllTodosAtom = atom(null, (get, set, completed: boolean) => {
+  set(todosAtom, get(todosAtom).map(withCompletedAs(completed)));
+});
+
+export const toggleTodoAtom = atom(null, (get, set, id: string) => {
+  set(todosAtom, get(todosAtom).map(toggleIfId(id)));
 });
 
 export const updateTodoAtom = atom(
   null,
-  (get, set, payload: { id: string; title: string; }) => {
-    set(
-      todosAtom,
-      get(todosAtom).map((todo) =>
-        todo.id === payload.id ? { ...todo, title: payload.title } : todo
-      )
-    );
+  (get, set, payload: { id: string; title: string }) => {
+    set(todosAtom, get(todosAtom).map(updateIfId(payload.id, payload.title)));
   }
 );
-
-export const clearCompletedTodosAtom = atom(null, (get, set) => {
-  set(
-    todosAtom,
-    get(todosAtom).filter((todo) => !todo.completed)
-  );
-});

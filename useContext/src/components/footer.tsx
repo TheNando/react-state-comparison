@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { useLocation } from "react-router-dom";
 
-import { useTodos } from "../todo-context";
+import { useTodos } from "../context";
 
 export function Footer() {
   const { pathname: route } = useLocation();

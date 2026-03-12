@@ -1,14 +1,24 @@
 import cn from "classnames";
-import { useAtomValue, useSetAtom } from "jotai/react";
+import { type Dispatch, type SetStateAction } from "react";
 import { useLocation } from "react-router-dom";
 
-import { todosAtom, toggleAllTodosAtom } from "../atoms/todos";
+import {
+  isCompleted,
+  isNotId,
+  withCompletedAs,
+  toggleIfId,
+  updateIfId,
+  type Todo
+} from "@/lib";
 import { Item } from "./item";
 
-export function Main() {
+type Props = {
+  todos: Todo[];
+  setTodos: Dispatch<SetStateAction<Todo[]>>;
+};
+
+export function List({ todos, setTodos }: Props) {
   const { pathname: route } = useLocation();
-  const todos = useAtomValue(todosAtom);
-  const toggleAllTodos = useSetAtom(toggleAllTodosAtom);
 
   const visibleTodos = todos.filter((todo) => {
     if (route === "/active") return !todo.completed;
@@ -17,7 +27,14 @@ export function Main() {
   });
 
   const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
-    toggleAllTodos(e.target.checked);
+    setTodos(todos.map(withCompletedAs(e.target.checked)));
+
+  const toggleItem = (id: string) => setTodos(todos.map(toggleIfId(id)));
+
+  const removeItem = (id: string) => setTodos(todos.filter(isNotId(id)));
+
+  const updateItem = (id: string, title: string) =>
+    setTodos(todos.map(updateIfId(id, title)));
 
   return (
     <main className="main">
@@ -27,7 +44,7 @@ export function Main() {
             className="toggle-all"
             type="checkbox"
             id="toggle-all"
-            checked={visibleTodos.every((todo) => todo.completed)}
+            checked={visibleTodos.every(isCompleted)}
             onChange={toggleAll}
           />
           <label className="toggle-all-label" htmlFor="toggle-all">
@@ -37,7 +54,13 @@ export function Main() {
       ) : null}
       <ul className={cn("todo-list")}>
         {visibleTodos.map((todo) => (
-          <Item todo={todo} key={todo.id} />
+          <Item
+            todo={todo}
+            key={todo.id}
+            toggleItem={toggleItem}
+            removeItem={removeItem}
+            updateItem={updateItem}
+          />
         ))}
       </ul>
     </main>

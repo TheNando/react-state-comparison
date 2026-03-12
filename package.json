@@ -7,6 +7,8 @@
     "useContext": "bun --hot ./useContext/index.html",
     "useState": "bun --hot ./useState/index.html",
     "useReducer": "bun --hot ./useReducer/index.html",
+    "rtk": "bun --hot ./rtk/index.html",
+    "zustand": "bun --hot ./zustand/index.html",
     "build": "bun build ./$0/index.html --outdir=dist --sourcemap --target=bun --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
     "start": "NODE_ENV=production bun ./$0/index.html",
     "format": "prettier --write .",
@@ -20,7 +22,8 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.13.1",
     "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.1"
+    "todomvc-common": "^1.0.1",
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
     "@types/bun": "latest",

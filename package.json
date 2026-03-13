@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "calc": "bun --hot ./calc-you-later/index.html",
     "jotai": "bun --hot ./jotai/index.html",
     "rtk": "bun --hot ./rtk/index.html",
     "signals": "bun --hot ./signals/index.html",
